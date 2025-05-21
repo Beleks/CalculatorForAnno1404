@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from "vue";
 import { useMainStore } from "../store/index";
+import IconClose from "./icons/IconClose.vue";
 
 const mainStore = useMainStore();
 
@@ -28,9 +29,7 @@ const chain = computed(() => {
         <!-- <div class="inactive">Only needed</div> -->
         <div class="active">~100%</div>
       </div>
-      <div @click="$emit('closePopup')">
-        <span class="material-symbols-outlined"> close </span>
-      </div>
+        <IconClose class="icon_close" :size="30" @click="$emit('closePopup')"/>
     </div>
     <!-- <div>cost</div> -->
     <div class="chain">
@@ -71,6 +70,7 @@ const chain = computed(() => {
   opacity: 0.5;
 }
 .active {
+  font-weight: bold;
   background-color: #ffe4c4;
 }
 .chain {
@@ -92,5 +92,8 @@ const chain = computed(() => {
 }
 .chain_type > div {
   padding: 0.2rem 1rem;
+}
+.icon_close {
+  padding: 0.1rem;
 }
 </style>
