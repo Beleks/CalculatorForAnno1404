@@ -6,23 +6,24 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
-    "pinia": "^2.2.2",
-    "vue": "^3.4.26",
-    "vue-router": "4"
+    "pinia": "^3.0.2",
+    "vue": "^3.5.14",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@vite-pwa/assets-generator": "^0.2.4",
-    "@vitejs/plugin-vue": "^5.0.4",
-    "sass-embedded": "^1.77.8",
-    "vite": "^5.2.10",
-    "vite-plugin-pwa": "^0.20.0",
-    "workbox-window": "^7.1.0"
+    "@vite-pwa/assets-generator": "^1.0.0",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "sass-embedded": "^1.89.0",
+    "vite": "^6.3.5",
+    "vite-plugin-pwa": "^1.0.0",
+    "workbox-window": "^7.3.0"
   },
   "resolutions": {
-    "sharp": "0.32.6",
+    "sharp": "0.34.2",
     "sharp-ico": "0.1.5"
   }
 }
