@@ -1,9 +1,9 @@
 <script setup>
-import { computed, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import {computed, ref} from "vue";
+import {useRouter, useRoute} from "vue-router";
 import PopupChain from "../components/PopupChain.vue";
 
-import { useMainStore } from "../store/index.js";
+import {useMainStore} from "../store/index.js";
 
 const version = __APP_VERSION__
 
@@ -64,10 +64,15 @@ const buildings = computed(() => {
   products.value[currentTab.value].forEach((product) => {
     let imgPath = new URL(`../assets/images/${product}.png`, import.meta.url).href;
     let industrialBuildings = mainStore.totalProductIntake(product);
-    let productUsageRate =
-      (industrialBuildings.totatalIntake * 100) /
-      Math.ceil(industrialBuildings.totatalIntake / industrialBuildings.productRate) /
-      industrialBuildings.productRate;
+    let productUsageRate
+    if (!industrialBuildings.totatalIntake) {
+      productUsageRate = 0
+    } else {
+      productUsageRate =
+          (industrialBuildings.totatalIntake * 100) /
+          Math.ceil(industrialBuildings.totatalIntake / industrialBuildings.productRate) /
+          industrialBuildings.productRate;
+    }
     productUsageRate = Math.floor(productUsageRate);
     let color;
     if (productUsageRate >= 90) {
@@ -124,11 +129,11 @@ function showChain(type) {
   <div>
     <div class="tabs">
       <div
-        class="tab"
-        v-for="(tab, index) in tabs"
-        :key="index"
-        :class="{ active_tab: currentTab == tab.tab }"
-        @click="switchTab(tab.tab)"
+          class="tab"
+          v-for="(tab, index) in tabs"
+          :key="index"
+          :class="{ active_tab: currentTab == tab.tab }"
+          @click="switchTab(tab.tab)"
       >
         {{ tab.title }}
       </div>
@@ -138,7 +143,7 @@ function showChain(type) {
         <div class="residents">
           <div class="resident" v-for="(resident, index) in residents" :key="index">
             <div class="resident_img">
-              <img :src="resident.imgPath" :alt="resident.type" />
+              <img :src="resident.imgPath" :alt="resident.type"/>
             </div>
             <div class="count_resident">{{ resident.count }}</div>
           </div>
@@ -150,7 +155,7 @@ function showChain(type) {
       <div class="product" v-for="(build, index) in buildings" :key="index" @click="showChain(build.type)">
         <div>
           <div class="img">
-            <img :src="build.imgPath" :alt="build.type" />
+            <img :src="build.imgPath" :alt="build.type"/>
           </div>
         </div>
         <div class="count" v-show="currentTab !== 'resources'">
@@ -162,7 +167,7 @@ function showChain(type) {
       </div>
     </div>
     <div v-if="popupOpen">
-      <PopupChain :product="popupProduct" @closePopup="popupOpen = false" />
+      <PopupChain :product="popupProduct" @closePopup="popupOpen = false"/>
     </div>
     <div class="app_version">v {{ version }}</div>
   </div>
@@ -172,13 +177,16 @@ function showChain(type) {
 .tabs {
   display: flex;
 }
+
 .tab {
   flex-grow: 1;
   padding: 0.6rem 0;
 }
+
 .active_tab {
   background-color: #ffe4c4;
 }
+
 .population {
   margin: 0.5rem;
   padding: 0.3rem;
@@ -187,25 +195,31 @@ function showChain(type) {
   border: 1px solid rgb(200, 200, 200);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+
   &:hover {
     background-color: hsla(0, 0%, 50%, 0.1);
   }
 }
+
 .residents {
   display: flex;
   justify-content: space-around;
 }
+
 .resident {
   display: flex;
   align-items: center;
 }
+
 .resident_img {
   margin-right: 2px;
 }
+
 .resident_img img {
   width: 20px;
   height: 20px;
 }
+
 /* content */
 .products {
   padding: 1rem;
@@ -213,19 +227,23 @@ function showChain(type) {
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
 .product {
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 5px;
   transition: all 0.2s ease-in-out;
+
   &:hover {
     background-color: rgba(128, 128, 128, 0.2);
   }
 }
+
 .img {
   width: 46px;
   height: 46px;
 }
+
 .utility {
   width: 100%;
   border: 1px solid rgb(200, 200, 200);
@@ -233,20 +251,25 @@ function showChain(type) {
   margin-bottom: 5px;
   border-radius: 3px;
   height: 5px;
+
   .line {
     width: 100%;
     height: 100%;
   }
+
   .good {
     background-color: #27ae60;
   }
+
   .warning {
     background-color: #f8ae4f;
   }
+
   .critic {
     background-color: #f74545;
   }
 }
+
 .count {
   margin-top: 2px;
 }
