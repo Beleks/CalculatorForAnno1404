@@ -1,5 +1,4 @@
 <script setup>
-// import HelloWorld from "./components/HelloWorld.vue";
 import PWABadge from "./components/PWABadge.vue";
 import { onMounted } from "vue";
 import { useMainStore } from "./store/index";
