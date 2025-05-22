@@ -49,7 +49,6 @@ const products = ref({
     "brocade_robes",
   ],
   east: ["dates", "milk", "carpets", "pearls", "coffee", "toilet_water", "marzipan"],
-  east: ["dates", "milk", "carpets", "pearls", "coffee", "toilet_water", "marzipan"],
   resources: ["wood", "instruments", "stone", "glass", "ropes", "mosaic", "weapons", "military_vehicles", "cannons"],
 });
 
@@ -63,17 +62,17 @@ const buildings = computed(() => {
   products.value[currentTab.value].forEach((product) => {
     let imgPath = new URL(`../assets/images/${product}.png`, import.meta.url).href;
     let industrialBuildings = mainStore.totalProductIntake(product);
-    let width =
+    let productUsageRate =
       (industrialBuildings.totatalIntake * 100) /
       Math.ceil(industrialBuildings.totatalIntake / industrialBuildings.productRate) /
       industrialBuildings.productRate;
-    width = Math.floor(width);
+    productUsageRate = Math.floor(productUsageRate);
     let color;
-    if (width >= 90) {
+    if (productUsageRate >= 90) {
       color = "critic";
-    } else if (width >= 60) {
+    } else if (productUsageRate >= 60) {
       color = "warning";
-    } else if (width < 60) {
+    } else if (productUsageRate < 60) {
       color = "good";
     } else {
       color = "";
@@ -83,7 +82,7 @@ const buildings = computed(() => {
       imgPath,
       ...industrialBuildings,
       style: {
-        width: `${width}%`,
+        width: `${productUsageRate}%`,
       },
       class: color,
     });
@@ -92,12 +91,11 @@ const buildings = computed(() => {
 });
 
 const residents = computed(() => {
-  if (currentTab.value == "east" || currentTab.value == "west") {
+  if (currentTab.value === "east" || currentTab.value === "west") {
     let residents = mainStore.getPopulation(currentTab.value);
 
     residents.forEach((element) => {
-      let imgPath = new URL(`../assets/images/${element.type}.png`, import.meta.url).href;
-      element.imgPath = imgPath;
+      element.imgPath = new URL(`../assets/images/${element.type}.png`, import.meta.url).href;
     });
     return residents;
   }
@@ -153,7 +151,7 @@ function showChain(type) {
             <img :src="build.imgPath" :alt="build.type" />
           </div>
         </div>
-        <div class="count">
+        <div class="count" v-show="currentTab !== 'resources'">
           <div class="utility">
             <div :class="[build.class, 'line']" :style="build.style"></div>
           </div>
