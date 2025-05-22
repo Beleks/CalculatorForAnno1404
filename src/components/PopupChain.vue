@@ -59,6 +59,8 @@ const chain = computed(() => {
   padding: 1rem;
   padding-bottom: 2rem;
   background-color: #fff;
+
+  z-index: 2;
 }
 .header {
   display: flex;

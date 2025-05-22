@@ -5,6 +5,8 @@ import PopupChain from "../components/PopupChain.vue";
 
 import { useMainStore } from "../store/index.js";
 
+const version = __APP_VERSION__
+
 const router = useRouter();
 const route = useRoute();
 const mainStore = useMainStore();
@@ -162,6 +164,7 @@ function showChain(type) {
     <div v-if="popupOpen">
       <PopupChain :product="popupProduct" @closePopup="popupOpen = false" />
     </div>
+    <div class="app_version">v {{ version }}</div>
   </div>
 </template>
 

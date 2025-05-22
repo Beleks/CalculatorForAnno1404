@@ -12,7 +12,6 @@ onMounted(() => {
 
 <template>
   <div><RouterView /></div>
-  <!-- <HelloWorld msg="anno-calculator" /> -->
   <PWABadge />
 </template>
 
@@ -46,6 +45,13 @@ onMounted(() => {
 }
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 40;
+}
+.app_version{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  font-weight: bold;
 }
 </style>
 
