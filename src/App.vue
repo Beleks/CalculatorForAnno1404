@@ -34,6 +34,7 @@ onMounted(() => {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  touch-action: pan-x pan-y;
 }
 #app {
   height: 100vh;

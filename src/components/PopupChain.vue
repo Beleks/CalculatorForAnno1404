@@ -41,7 +41,7 @@ const chain = computed(() => {
           </div>
           <div v-show="index > 0" class="grow_1">{{ product.count }} ({{ product.efficacy * 100 }}%)</div>
         </div>
-        <div v-show="index == 0">=</div>
+        <div v-show="index === 0">=</div>
       </div>
     </div>
   </div>
